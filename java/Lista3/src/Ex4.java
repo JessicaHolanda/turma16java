@@ -3,20 +3,9 @@ import java.util.Scanner;
 public class Ex4 {
 
 	public static void main(String[] args) {
-		/*
-		 * o ; 
-			o ; 
-			o ; 
-			o ;
-		 * 
-		
-		(1-feminino / 2-masculino / 3-Outros), 
-		e as opções (1, se a pessoa era calma; 2, se a pessoa era nervosa e 3, se a pessoa era agressiva)
-		
-		*/
-		
+				
 		int pessoasCalmas=0, mulheresNervosas=0, homensAgressivos=0, outrosCalmos, humor, qtd, idade;
-		int genero;
+		int genero, pessoasNervosas;
 		Scanner scan = new Scanner(System.in);
 		
 		while(qtd <150) {
@@ -46,7 +35,10 @@ public class Ex4 {
 				
 				if (genero == 3 && humor == 3)
 					outrosCalmos++;
-			
+				
+				if (humor == 2 && idade > 40)
+					
+				if (humor == 1 && idade < 18)
 					
 			
 				/*switch(genero) {
@@ -64,10 +56,12 @@ public class Ex4 {
 				}*/
 				
 		
-		System.out.printf("\nNúmero de pessoas calmas %d", pessoasCalmas);
-		System.out.printf("\nNúmero de mulheres nervosas %d", mulheresNervosas);
-		System.out.printf("\nNúmero de homens agressivos %d", homensAgressivos);
-		System.out.printf("\nNúmero de outros calmos %d", outrosCalmos);
+		System.out.printf("\nNúmero de pessoas calmas: %d", pessoasCalmas);
+		System.out.printf("\nNúmero de mulheres nervosas: %d", mulheresNervosas);
+		System.out.printf("\nNúmero de homens agressivos: %d", homensAgressivos);
+		System.out.printf("\nNúmero de outros calmos: %d", outrosCalmos);
+		System.out.printf("\nNúmero de pessoas nervosas com mais de 40 anos: %d", outrosCalmos);
+		System.out.printf("\nNúmero de pessoas calmas com menos de 18 anos: %d", outrosCalmos);
 	}
 
 }
