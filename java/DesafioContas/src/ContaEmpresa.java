@@ -1,116 +1,143 @@
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 
 public class ContaEmpresa {
 
-	public static void main(String[] args) {
-		double saldo = 0.00;
-		int opcao;
-		Scanner scan = new Scanner (System.in);	
-		DesafioBanco menu = new DesafioBanco();
-		
-		System.out.println("CONTA EMPRESARIAL\nBem vindo!\n");
-		System.out.printf("Saldo atual: R$ %f \n\n", saldo);
-		
-		System.out.println("OPÇÕES DISPONIVEIS: ");
-		System.out.println("1 - Emprestimo");
-		System.out.println("2 - Debitar");
-		System.out.println("3 - Creditar");
-		System.out.println("4 - Voltar ao menu anterior");
-		System.out.println("5 - Sair");
-		opcao = scan.nextInt();
-		
-		switch(opcao) {
-		case 1:
-			saldo = getEmprestimo(saldo);
-			break;
-		case 2:
-			debitar(saldo);
-			break;
-		case 3:
-			creditar(saldo);
-			break;
-		case 4:
-			DesafioBanco.main(args);
-			break;
-		case 5:
-			System.exit(0);
-			break;
-			default: 
-				System.out.println("Opção inválida!!!");
-		}	
-	}
-	
-	//--------------------------------------------------------------------------
-	// FUNÇÃO EMPRESTIMO
-	public static double getEmprestimo(double saldo) {
-		double valorEmprestimo, emprestimoDisponivel = 10000.00, valor;
-		Scanner scan = new Scanner (System.in);	
-		
-		
-		System.out.println("\nMENU DE EMPRESTIMO\n");
-		System.out.println("Deseja fazer um emprestimo S/N: ");
-		char resp = scan.next().charAt(0);
-		
-		if (resp=='S' || resp =='s') {
-			do {
-				System.out.println("Insira o valor do empréstimo [Até R$ 10.000]: ");
-				valorEmprestimo = scan.nextDouble();
-				if (valorEmprestimo <= emprestimoDisponivel) {
-					saldo += valorEmprestimo;
-				}
-			} while (valorEmprestimo > emprestimoDisponivel);
-				
-			System.out.printf("\nO novo saldo é de: R$ %f", saldo);
-			
-			System.out.println("\n\nDeseja voltar ao menu anterior S/N? ");
-			resp = scan.next().charAt(0);
+	// Declaração de atributos
+	private double saldo;
+	private double emprestimoDisponivel;
+	private String descricao;
+	private DesafioBanco menu;
 
-			if (resp=='S' || resp =='s') {
-				ContaEmpresa.main(null);
-			}else {
-				System.exit(0);
-			}
-		}
-		return saldo;
+	// Função construtor
+	public ContaEmpresa() {
+		this.setSaldo(0);
+		this.setEmprestimoDisponivel(10000);
 	}
-	//--------------------------------------------------------------------------------
-	
+
+	public ContaEmpresa(double saldo, double emprestimoDisponivel) {
+		this.setSaldo(saldo);
+		this.setEmprestimoDisponivel(emprestimoDisponivel);
+	}
+
+	// Saldo
+	public double getSaldo() {
+		return this.saldo;
+	}
+
+	public void setSaldo(double saldo) {
+		this.saldo = saldo;
+	}
+
+	// Emprestimo disponivel
+	public double getEmprestimoDisponivel() {
+		return this.emprestimoDisponivel;
+	}
+
+	public void setEmprestimoDisponivel(double emprestimoDisponivel) {
+		this.emprestimoDisponivel = emprestimoDisponivel;
+	}
+
+	// --------------------------------------------------------------------------
+	// FUNÇÃO EMPRESTIMO
+	public void getEmprestimo() {
+		double valorEmprestimo = 0.00;
+		boolean isValid;
+		Scanner scan = new Scanner(System.in);
+		
+		System.out.println("**********************************************");
+		System.out.println("\nMENU DE EMPRESTIMO\n");
+
+			do {
+				isValid = true;
+				if (this.emprestimoDisponivel > 0) {
+					System.out.printf("Insira o valor do empréstimo até R$ %f \n", this.emprestimoDisponivel);
+					valorEmprestimo = scan.nextDouble();
+
+					if (valorEmprestimo > this.emprestimoDisponivel) {
+						System.out.printf("\nVocê possui apenas %f disponínel para emprestimo",
+								this.emprestimoDisponivel);
+						isValid = false;
+					} else {
+						this.saldo += valorEmprestimo;
+						this.emprestimoDisponivel -= valorEmprestimo;
+		
+					}
+
+				} else {
+					System.out.println("Você não possui valor disponível para empréstimo\n");
+					break;
+				}
+
+			} while (isValid == false);		
+	}
+	// --------------------------------------------------------------------------------
+
 	// FUNÇÃO DEBITO
 
-	public static double debitar(double saldo) {
-		Scanner scan = new Scanner (System.in);	
+	public void debitar() {
+		Scanner scan = new Scanner(System.in);
 		double debito;
+		System.out.println("**********************************************");
 		System.out.println("MENU DEBITO\n\n");
-		System.out.printf("Saldo atual: ",saldo);
-		
+		System.out.printf("Saldo atual: R$ %f", this.saldo);
+
 		do {
-			System.out.println("Digite o valor que quer debitar: ");
+			System.out.println("\nDigite o valor que quer debitar: ");
 			debito = scan.nextDouble();
-			
-			if(debito < saldo)
-				saldo -= debito;
-			else 
-				System.out.println("Valor maior que o disponível em conta");
-		} while(debito > saldo);
+
+			if (debito < this.saldo) {
+				this.saldo -= debito;
+				break;
+			} else {
+				System.out.println("\nValor maior que o disponível em conta");
+			}
+				
+		} while (debito > this.saldo);
 		
-		return saldo;
+		
 	}
-	//--------------------------------------------------------------------------------
-	
+	// --------------------------------------------------------------------------------
+
 	// FUNÇÃO CRÉDITO
-	
-	public static double creditar(double saldo) {
-		Scanner scan = new Scanner (System.in);	
+
+	public void creditar() {
+		Scanner scan = new Scanner(System.in);
 		double credito;
+		System.out.println("\n**********************************************");
 		System.out.println("MENU CREDITO\n\n");
-		System.out.printf("Saldo atual: ",saldo);
-		
-		System.out.println("Digite o valor que quer debitar: ");
+		System.out.printf("Saldo atual: R$ %f", this.saldo);
+
+		System.out.println("\nDigite o valor que quer debitar: ");
 		credito = scan.nextDouble();
-		
-		saldo += credito;
-		
-		return saldo;
+
+		this.saldo += credito;
+
+		// addExtrato(descricao, saldo);
+
 	}
+
+	// --------------------------------------------------------------------------------
+
+	// FUNÇÃO EXTRATO
+
+	/*
+	 * public String[] addExtrato(String descricao, double saldo) { String extrato[]
+	 * = new String[10];
+	 * 
+	 * Date dataHoraAtual = new Date(); String data = new
+	 * SimpleDateFormat("dd/MM/yyyy").format(dataHoraAtual); String hora = new
+	 * SimpleDateFormat("HH:mm:ss").format(dataHoraAtual);
+	 * 
+	 * for(int i = 0; i < extrato.length; i++) { if(extrato[i] != null) extrato[i] =
+	 * System.out.printf("\nHorário da transação: %s \nDescrição: %s \nValor: R$ %f"
+	 * , dataHoraAtual, descricao, saldo); } return extrato; }
+	 * 
+	 * public static getExtrato() {
+	 * 
+	 * 
+	 * }
+	 */
 
 }
