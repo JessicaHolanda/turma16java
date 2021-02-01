@@ -2,22 +2,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class ContaEspecial {
+public class ContaPoupanca {
 
 	// Declaração de atributos
 	private double saldo;
-	private double limiteDisponivel;
+	private double emprestimoDisponivel;
 	private List<Extrato> extrato = new ArrayList<Extrato>();
 
 	// Função construtor
-	public ContaEspecial() { 
+	public ContaPoupanca() { 
 		this.setSaldo(0);
-		this.setLimiteDisponivel(1000);
+		this.setEmprestimoDisponivel(10000);
 	}
 
-	public ContaEspecial(double saldo, double limiteDisponivel) {
+	public ContaPoupanca(double saldo, double emprestimoDisponivel) {
 		this.setSaldo(saldo);
-		this.setLimiteDisponivel(limiteDisponivel);
+		this.setEmprestimoDisponivel(emprestimoDisponivel);
 	}
 
 	// Saldo
@@ -30,12 +30,12 @@ public class ContaEspecial {
 	}
 
 	// Emprestimo disponivel
-	public double getLimiteDisponivel() {
-		return this.limiteDisponivel;
+	public double getEmprestimoDisponivel() {
+		return this.emprestimoDisponivel;
 	}
 
-	public void setLimiteDisponivel(double limiteDisponivel) {
-		this.limiteDisponivel = limiteDisponivel;
+	public void setEmprestimoDisponivel(double emprestimoDisponivel) {
+		this.emprestimoDisponivel = emprestimoDisponivel;
 	}
 	
 	 // Extrato
@@ -48,39 +48,28 @@ public class ContaEspecial {
 		}
 
 	// --------------------------------------------------------------------------
-	// FUNÇÃO LIMITE
-	public void limite() {
-		double valorLimite = 0.00;
+	// FUNÇÃO EMPRESTIMO
+	public void getEmprestimo() {
+		double valorEmprestimo = 0.00;
 		boolean isValid;
-		String descricao, transacao = "Limite";
 		Scanner scan = new Scanner(System.in);
 		
 		System.out.println("**********************************************");
-		System.out.println("\nMENU DE LIMITE\n");
+		System.out.println("\nMENU DE EMPRESTIMO\n");
 
 			do {
 				isValid = true;
-				if (this.limiteDisponivel > 0) {
-					System.out.printf("Insira o valor do limite até R$ %.2f \n", this.limiteDisponivel);
-					valorLimite = scan.nextDouble();
+				if (this.emprestimoDisponivel > 0) {
+					System.out.printf("Insira o valor do empréstimo até R$ %.2f \n", this.emprestimoDisponivel);
+					valorEmprestimo = scan.nextDouble();
 
-					if (valorLimite > this.limiteDisponivel) {
-						System.out.printf("\nVocê possui apenas %.2f de limite disponínel",
-								this.limiteDisponivel);
+					if (valorEmprestimo > this.emprestimoDisponivel) {
+						System.out.printf("\nVocê possui apenas %.2f disponínel para emprestimo",
+								this.emprestimoDisponivel);
 						isValid = false;
 					} else {
-						this.saldo += valorLimite;
-						this.limiteDisponivel -= valorLimite;
-						
-						System.out.println("Digite A descrição da solicitação: ");
-						descricao = scan.nextLine();
-						
-						Extrato itemExtrato = new Extrato(); 
-						itemExtrato.setValor(valorLimite);
-						itemExtrato.setTransacao(transacao);
-						itemExtrato.setDescricao(descricao);
-						
-						this.setExtrato(itemExtrato);
+						this.saldo += valorEmprestimo;
+						this.emprestimoDisponivel -= valorEmprestimo;
 		
 					}
 
@@ -99,7 +88,6 @@ public class ContaEspecial {
 		Scanner scan = new Scanner(System.in);
 		double debito;
 		String descricao, transacao = "Débito";
-		
 		System.out.println("**********************************************");
 		System.out.println("MENU DEBITO\n\n");
 		System.out.printf("Saldo atual: R$ %.2f", this.saldo);
@@ -128,7 +116,6 @@ public class ContaEspecial {
 				
 		} while (debito > this.saldo);
 		
-		
 	}
 	// --------------------------------------------------------------------------------
 
@@ -138,7 +125,6 @@ public class ContaEspecial {
 		Scanner scan = new Scanner(System.in);
 		double credito;
 		String descricao, transacao = "Crédito";
-		
 		System.out.println("\n**********************************************");
 		System.out.println("MENU CREDITO\n\n");
 		System.out.printf("Saldo atual: R$ %.2f", this.saldo);
@@ -158,8 +144,6 @@ public class ContaEspecial {
 		
 		this.setExtrato(itemExtrato);
 
-		// addExtrato(descricao, saldo);
-
 	}
 
 	// --------------------------------------------------------------------------------
@@ -173,5 +157,5 @@ public class ContaEspecial {
 		    System.out.printf ("\nData: %s\t Transação: %s\t Descrição: %s\t Valor: %.2f " , obj.getData() ,  obj.getTransacao() , obj.getDescricao() , obj.getValor());
 		}
 	}
-	
+
 }

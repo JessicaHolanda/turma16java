@@ -1,5 +1,5 @@
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class ContaEmpresa {
@@ -7,11 +7,10 @@ public class ContaEmpresa {
 	// Declaração de atributos
 	private double saldo;
 	private double emprestimoDisponivel;
-	private String descricao;
-	private DesafioBanco menu;
+	private List<Extrato> extrato = new ArrayList<Extrato>();
 
 	// Função construtor
-	public ContaEmpresa() {
+	public ContaEmpresa() { 
 		this.setSaldo(0);
 		this.setEmprestimoDisponivel(10000);
 	}
@@ -38,12 +37,24 @@ public class ContaEmpresa {
 	public void setEmprestimoDisponivel(double emprestimoDisponivel) {
 		this.emprestimoDisponivel = emprestimoDisponivel;
 	}
+	
+	 // Extrato
+	public List<Extrato> getExtrato(){
+		return this.extrato;
+	}
+	
+	public void setExtrato(Extrato itemExtrato){
+		this.extrato.add(itemExtrato);
+	}
 
 	// --------------------------------------------------------------------------
 	// FUNÇÃO EMPRESTIMO
-	public void getEmprestimo() {
+	public void emprestimo() {
 		double valorEmprestimo = 0.00;
 		boolean isValid;
+		
+		String descricao;
+		String transacao = "Emprestimo";
 		Scanner scan = new Scanner(System.in);
 		
 		System.out.println("**********************************************");
@@ -52,17 +63,25 @@ public class ContaEmpresa {
 			do {
 				isValid = true;
 				if (this.emprestimoDisponivel > 0) {
-					System.out.printf("Insira o valor do empréstimo até R$ %f \n", this.emprestimoDisponivel);
+					System.out.printf("Insira o valor do empréstimo até R$ %.2f \n", this.emprestimoDisponivel);
 					valorEmprestimo = scan.nextDouble();
 
 					if (valorEmprestimo > this.emprestimoDisponivel) {
-						System.out.printf("\nVocê possui apenas %f disponínel para emprestimo",
+						System.out.printf("\nVocê possui apenas %.2f disponínel para emprestimo",
 								this.emprestimoDisponivel);
 						isValid = false;
 					} else {
 						this.saldo += valorEmprestimo;
 						this.emprestimoDisponivel -= valorEmprestimo;
-		
+						System.out.println("Digite A descrição da solicitação: ");
+						descricao = scan.nextLine();
+						
+						Extrato itemExtrato = new Extrato(); 
+						itemExtrato.setValor(valorEmprestimo);
+						itemExtrato.setTransacao(transacao);
+						itemExtrato.setDescricao(descricao);
+						
+						this.setExtrato(itemExtrato);
 					}
 
 				} else {
@@ -71,6 +90,7 @@ public class ContaEmpresa {
 				}
 
 			} while (isValid == false);		
+			
 	}
 	// --------------------------------------------------------------------------------
 
@@ -79,9 +99,10 @@ public class ContaEmpresa {
 	public void debitar() {
 		Scanner scan = new Scanner(System.in);
 		double debito;
+		String descricao, transacao = "Débito";
 		System.out.println("**********************************************");
 		System.out.println("MENU DEBITO\n\n");
-		System.out.printf("Saldo atual: R$ %f", this.saldo);
+		System.out.printf("Saldo atual: R$ %.2f", this.saldo);
 
 		do {
 			System.out.println("\nDigite o valor que quer debitar: ");
@@ -89,6 +110,17 @@ public class ContaEmpresa {
 
 			if (debito < this.saldo) {
 				this.saldo -= debito;
+				
+				System.out.println("Digite A descrição da solicitação: ");
+				descricao = scan.nextLine();
+				
+				Extrato itemExtrato = new Extrato(); 
+				itemExtrato.setValor(debito);
+				itemExtrato.setTransacao(transacao);
+				itemExtrato.setDescricao(descricao);
+				
+				this.setExtrato(itemExtrato);
+				
 				break;
 			} else {
 				System.out.println("\nValor maior que o disponível em conta");
@@ -105,14 +137,25 @@ public class ContaEmpresa {
 	public void creditar() {
 		Scanner scan = new Scanner(System.in);
 		double credito;
+		String descricao, transacao = "Crédito";
 		System.out.println("\n**********************************************");
 		System.out.println("MENU CREDITO\n\n");
-		System.out.printf("Saldo atual: R$ %f", this.saldo);
+		System.out.printf("Saldo atual: R$ %.2f", this.saldo);
 
-		System.out.println("\nDigite o valor que quer debitar: ");
+		System.out.println("\nDigite o valor que quer creditar: ");
 		credito = scan.nextDouble();
 
 		this.saldo += credito;
+		
+		System.out.println("Digite A descrição da solicitação: ");
+		descricao = scan.nextLine();
+		
+		Extrato itemExtrato = new Extrato(); 
+		itemExtrato.setValor(credito);
+		itemExtrato.setTransacao(transacao);
+		itemExtrato.setDescricao(descricao);
+		
+		this.setExtrato(itemExtrato);
 
 		// addExtrato(descricao, saldo);
 
@@ -122,22 +165,12 @@ public class ContaEmpresa {
 
 	// FUNÇÃO EXTRATO
 
-	/*
-	 * public String[] addExtrato(String descricao, double saldo) { String extrato[]
-	 * = new String[10];
-	 * 
-	 * Date dataHoraAtual = new Date(); String data = new
-	 * SimpleDateFormat("dd/MM/yyyy").format(dataHoraAtual); String hora = new
-	 * SimpleDateFormat("HH:mm:ss").format(dataHoraAtual);
-	 * 
-	 * for(int i = 0; i < extrato.length; i++) { if(extrato[i] != null) extrato[i] =
-	 * System.out.printf("\nHorário da transação: %s \nDescrição: %s \nValor: R$ %f"
-	 * , dataHoraAtual, descricao, saldo); } return extrato; }
-	 * 
-	 * public static getExtrato() {
-	 * 
-	 * 
-	 * }
-	 */
+	public void showExtrato() {
+		 System.out.println ("\n**********************************************");
+		 System.out.println ("Extrato da Conta Empresa\n");
+		for (Extrato obj : this.extrato) {
+		    System.out.printf ("Data: %s\t Transação: %s\t Descrição: %s\t Valor: %.2f " , obj.getData() ,  obj.getTransacao() , obj.getDescricao() , obj.getValor());
+		}
+	}
 
 }
