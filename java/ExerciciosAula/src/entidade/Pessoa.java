@@ -5,8 +5,21 @@ public class Pessoa {
 	public String nome;
 	public int anoNascimento;
 	public char genero;
+	public boolean estaVivo;
+
+	// CONSTRUTORES
 	
+	public Pessoa(String nome) {
+		this.nome = nome;
+	}
 	
+	public Pessoa(String nome, boolean estaVivo) {
+		this.nome = nome;
+		this.estaVivo = estaVivo;
+	}
+
+	// METODOS
+
 	public int idade() {
 		return 2021 - anoNascimento;
 	}
@@ -42,19 +55,4 @@ public class Pessoa {
 		
 	}
 	
-	
-	// HERANÇA
-	// ABSTRAÇÃO
-	// DELEGAÇÃO DE RESPONSABILIDADE
-	// SEGURANÇA
-	
-	//	 CONTRUTORES
-	// * SOBRECARGAS
-	
-	//ENCAPSULAMENTO
-	
-	// METODOS
-	
-	// 
-
 }

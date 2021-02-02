@@ -7,7 +7,8 @@ public class CursoIngles {
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
 
-		Pessoa broder1 = new Pessoa();
+		Pessoa broder1 = new Pessoa("Jessica");
+		Pessoa broder2 = new Pessoa("Hitomi", true);
 		
 		System.out.println("\t\t ESCOLA DE INGLÊS");
 
