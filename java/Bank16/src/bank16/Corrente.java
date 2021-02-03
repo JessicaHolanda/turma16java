@@ -17,7 +17,6 @@ public class Corrente extends Conta{
 		this.qtMesTalao = qtMesTalao;
 	}
 	
-	
 	public void emitirTalao(int qtd) {
 		System.out.println("**********************************************");
 		System.out.println("\n\tMENU TALÕES DE CHEQUE\n");
@@ -25,8 +24,4 @@ public class Corrente extends Conta{
 		this.qtMesTalao -= qtd;
 	}
 	
-	
-	
-	
-
 }

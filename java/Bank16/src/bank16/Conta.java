@@ -4,7 +4,7 @@ public class Conta {
 
 	private String numero;
 	private String cpf;
-	private double saldo;
+	protected double saldo;
 
 	public Conta(String numero, String cpf) {
 		this.numero = numero;
