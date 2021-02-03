@@ -33,12 +33,11 @@ public class PessoaFisica extends Cliente {
 		Scanner scan = new Scanner(System.in);
 		double emprestimo=0.00;
 		System.out.println("EMPRESTIMO PESSOA FISICA\n");
-		System.out.printf("\nValor disponível para empréstimo %.2f: ", this.emprestimoPF);
 		
-		System.out.printf("\nDigite o valor do emprestimo até %.2f", this.emprestimoPF);
+		System.out.printf("\nDigite o valor do emprestimo até %.2f\n", this.emprestimoPF);
 		emprestimo = scan.nextDouble();
 		
-		System.out.printf("Emprestimo de %.2f realizado!", emprestimo);
+		System.out.printf("Emprestimo de R$ %.2f realizado!", emprestimo);
 	}
 	
 }

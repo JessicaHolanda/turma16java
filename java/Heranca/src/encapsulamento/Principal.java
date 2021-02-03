@@ -6,6 +6,8 @@ public class Principal {
 		
 		PessoaFisica cliente1 = new PessoaFisica("001", "03/02/2021", "Dani");
 		
+		System.out.printf("Bem vindo, %s", cliente1.getNome());
+		
 		cliente1.solicitarEmprestimoPF();
 		
 	}

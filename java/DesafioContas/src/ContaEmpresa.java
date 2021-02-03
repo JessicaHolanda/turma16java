@@ -157,8 +157,6 @@ public class ContaEmpresa {
 		
 		this.setExtrato(itemExtrato);
 
-		// addExtrato(descricao, saldo);
-
 	}
 
 	// --------------------------------------------------------------------------------

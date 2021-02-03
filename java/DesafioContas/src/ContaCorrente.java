@@ -139,7 +139,7 @@ public class ContaCorrente {
 		System.out.println("\tMENU CREDITO\n\n");
 		System.out.printf("Saldo atual: R$ %.2f", this.saldo);
 
-		System.out.println("\nDigite o valor que quer debitar: ");
+		System.out.println("\nDigite o valor que quer creditar: ");
 		credito = scan.nextDouble();
 
 		this.saldo += credito;
