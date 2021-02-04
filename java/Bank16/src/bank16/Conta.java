@@ -1,6 +1,6 @@
 package bank16;
 
-public class Conta {
+public abstract class Conta {
 
 	private String numero;
 	private String cpf;

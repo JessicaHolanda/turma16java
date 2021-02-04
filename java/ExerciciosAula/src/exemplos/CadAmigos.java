@@ -9,7 +9,7 @@ public class CadAmigos {
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
 
-		Pessoa broder1 = new Pessoa();
+		Pessoa broder1 = new Pessoa("abc");
 
 		System.out.println("Digite seu nome");
 		broder1.nome = scan.next();
@@ -25,7 +25,7 @@ public class CadAmigos {
 		System.out.println("");
 
 		if (broder1.idade() < 18) {
-			statusIdade();
+			broder1.statusIdade();
 		}
 		else
 			System.out.println("Seja bem vinde!!!");

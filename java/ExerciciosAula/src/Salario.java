@@ -15,8 +15,7 @@ public class Salario {
 	int filhos, qtdFilhos, i, h =5, cont;
 	Scanner scan = new Scanner(System.in);
 	
-	for (i=1; i<=h; i++)
-	{
+	for (i=1; i<=h; i++){
 		System.out.println("Insira o Salário: ");
 		salario = scan.nextDouble();
 		System.out.println("Insira o número de filhos: ");
@@ -49,4 +48,4 @@ public class Salario {
 
 }
 
-}
+
