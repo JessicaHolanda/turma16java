@@ -1,125 +1,46 @@
-import java.util.Scanner;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class Carrinho {
-
+	
+	private double subTotal;
+	private Map<String, ItemCarrinho> mapItemCarrinho = new HashMap<String,ItemCarrinho>();
+	
 	public Carrinho() {
 		
 	}
-	
-	
-	
-	public static void mostraProdutos(String codProduto[], String descricaoProduto[], int estoqueTotal[],
-			double valorProduto[]) {
 
-		System.out.println("CODIGO \t PRODUTO \t PREÇO \t\t QUANTIDADE");
-		for (int i = 0; i < 10; i++) {
-			System.out.printf("\n %s \t %s \t R$ %.2f \t Qtd:  %d", codProduto[i], descricaoProduto[i], valorProduto[i],
-					estoqueTotal[i]);
+	
+	public Map<String, ItemCarrinho> getMapItemCarrinho() {
+		return mapItemCarrinho;
+	}
+
+	public void setMapItemCarrinho(Map<String, ItemCarrinho> mapItemCarrinho) {
+		this.mapItemCarrinho = mapItemCarrinho;
+	}
+
+	public double calculaSubtotal() {
+		double aux=0;
+		for(ItemCarrinho item : mapItemCarrinho.values()) {
+			aux += item.getTotal();
 		}
-
+		this.subTotal = aux;
+		return this.subTotal;
 	}
 	
-	// --------------------------------------------------------------------------
-
-	static void carrinhoCompra(String codProduto[], String descricaoProduto[], int estoqueTotal[], double valorProduto[]) {
-        Scanner leitor = new Scanner(System.in);
-        int opc;
-        String carrinho[] = new String[10];
-        String codigo;
-        
-
-        double[] valorCarrinho = new double[10];
-        double valorFinal = 0.00;
-        
-        System.out.println("***************************************");
-        System.out.println("\t\t CARRINHO");
-        System.out.println("1 - Adicionar novo produto");
-        System.out.println("2 - Alterar quantidade de um produto");
-        System.out.println("3 - Remover produto");
-        opc = leitor.nextInt();
-        
-        switch(opc) {
-        case 1:
-        	break;
-        case 2: 
-        	alterarQtdProduto();
-        	break;
-        case 3:
-        	removerProduto();
-        	break;
-        }
-         
-        // adicionar produto - chama função
-        
-        mostraProdutos(codProduto, descricaoProduto, estoqueTotal, valorProduto);
-	}
-        
-     // --------------------------------------------------------------------------
 	
-	static void mostrarCarrinho() {
-		String carrinho[] = new String[10];
+	public void addItemCarrinho(ItemCarrinho itemCarrinho) {
+		this.mapItemCarrinho.put(itemCarrinho.getProduto().getCodProduto(), itemCarrinho);
 	}
-
-    // --------------------------------------------------------------------------
-
-	static void alterarQtdProduto(String codProduto[], String descricaoProduto[], int estoqueTotal[], double valorProduto[]) {
-		
-		String carrinho[] = new String[10];
-		String codigo;
-		int qtd, qtdComprado;
-		Scanner leitor = new Scanner(System.in);
-
-		mostrarCarrinho();
-		
-		System.out.println("Digite o código do produto que deseja alterar: ");
-		codigo = leitor.next();
-
-		for (int i = 0; i < 10; i++) {
-			if (codigo == codProduto[i]) {
-				do {
-					System.out.println("Digite a nova quantidade que deseja: ");
-					qtd = leitor.nextInt();
-
-					if (qtd > estoqueTotal[i]) {
-						System.out.printf("Há apenas %d disponivel no estoque", estoqueTotal[i]);
-					} else {
-						qtdComprado = qtd;
-					}
-
-				} while (qtd > estoqueTotal[i]);
-			} else {
-				System.out.println("Código inválido!");
-			}
-
+	
+	
+	public void mostraCarrinho() {
+		this.calculaSubtotal();
+		for(ItemCarrinho mostrar : mapItemCarrinho.values()) {
+			System.out.println(mostrar.toString());
 		}
+		System.out.printf("\n\nSubtotal: %.2f", this.subTotal);
 	}
-
-	// --------------------------------------------------------------------------
-
-	static void removerProduto(String codProduto[], String descricaoProduto[], int estoqueTotal[], double valorProduto[]) {
-		String codigo;
-		String carrinho[] = new String[10];
-		Scanner leitor = new Scanner(System.in);
-		
-		System.out.println("Digite o código do produto que deseja alterar: ");
-		codigo = leitor.nextLine();
-				
-		for (int i = 0; i < 10; i++) {
-			
-			if(codigo == carrinho[i]) {
-				carrinho[i] = null;
-			}
-			else {
-				System.out.println("Códiigo inválido!");
-			}
-		}
-		
-	}
-
-	// --------------------------------------------------------------------------
-
-	
-	
-	
-	
 }
+ 

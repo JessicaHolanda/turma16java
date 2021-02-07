@@ -1,20 +1,22 @@
 package ex3;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
 public class TestaEstoque {
 	
-	public static Estoque prod1 = new Estoque();
 	public static List<Estoque> estoque = new ArrayList<Estoque>();
 
 	public static void main(String[] args) {
 		
-		System.out.println("1 - Armazenar dados ");
+		System.out.println("\n\n CADASTRO ESTOQUE\n\n");
+		System.out.println("\n1 - Armazenar dados ");
 		System.out.println("2 - Remover dados");
 		System.out.println("3 - Atualizar dados");
 		System.out.println("4 - Apresentar todos os dados");
+		System.out.println("5 - Sair");
 		
 		Scanner scan = new Scanner(System.in);
 		int op;
@@ -31,6 +33,9 @@ public class TestaEstoque {
 			break;
 		case 3:
 			break;
+		case 4: 
+			mostraLista();
+			break;
 		
 		}
 		
@@ -45,7 +50,7 @@ public class TestaEstoque {
 		double valor;
 		int qtd;
 		
-		System.out.println("Digite o código do produto: ");
+		System.out.println("\nDigite o código do produto: ");
 		cod = scan.next();
 		System.out.println("Digite a descrição do produto: ");
 		descricao = scan.next();
@@ -54,12 +59,19 @@ public class TestaEstoque {
 		System.out.println("Digite a quantidade do produto que quer armazenar: ");
 		qtd = scan.nextInt();
 		
-		prod1.setCodProduto(cod);
-		prod1.setDescricaoProduto(descricao);
-		prod1.setValorProduto(valor);
-		prod1.setQtdProduto(qtd);
+		Estoque prod = new Estoque();
 		
-		System.out.println("Produto cadastrado!");
+		prod.setCodProduto(cod);
+		prod.setDescricaoProduto(descricao);
+		prod.setValorProduto(valor);
+		prod.setQtdProduto(qtd);
+		estoque.add(prod);
+		
+		System.out.println("\nProduto cadastrado!\n\n");
+		
+		mostraLista();
+		
+		main(null);
 	}
 	
 	// --------------------------------------------------------------------------------
@@ -69,23 +81,48 @@ public class TestaEstoque {
 		Scanner scan = new Scanner(System.in);
 		String exclui;
 
-		for (Estoque aux : estoque) {
-			System.out.printf("Código: %s\t Descrição: %s\t Valor: R$ %.2f \t Quantidade: %d", aux.getCodProduto(), aux.getDescricaoProduto(), aux.getValorProduto(), aux.getQtdProduto());
-		}
+		mostraLista();
 		
-		System.out.println("Digite o código do produto que deseja excluir: ");
+		System.out.println("\n\nDigite o código do produto que deseja excluir: ");
 		exclui = scan.next();
 		
-		
-		for (Estoque o : estoque) {
-			remove(o.getCodProduto()== exclui ? o==null : o.equals(e));
+		Iterator<Estoque> itr =estoque.iterator();
+		while(itr.hasNext()){
+			Estoque produto = itr.next();
+			if(produto.getCodProduto().equals(exclui)){
+				itr.remove();
+				System.out.println("teste");
 		}
+	}
 		
+		mostraLista();
 		
+		main(null);
+		//System.out.printf("\nCódigo não encontrado!");
+	}
+	
+	// --------------------------------------------------------------------------------
+	
+	public static void atualizaDados() {
 		
+		mostraLista();
 		
 		
 	}
+	
+	
+	
+	// --------------------------------------------------------------------------------
+	
+	public static void mostraLista() {
+		
+		for (Estoque aux : estoque) {
+			System.out.println(aux.toString());
+		}
+	}
+	
+	
+	// --------------------------------------------------------------------------------
 	
 	
 	
