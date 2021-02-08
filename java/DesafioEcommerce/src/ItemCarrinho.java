@@ -13,6 +13,13 @@ public class ItemCarrinho {
 		
 		this.totalItem();
 	}
+	
+	public ItemCarrinho(Produto produto) {
+		this.produto = produto;
+		
+		this.totalItem();
+	}
+
 
 	public int getQtdProduto() {
 		return qtdProduto;
@@ -21,6 +28,7 @@ public class ItemCarrinho {
 
 	public void setQtdProduto(int qtdProduto) {
 		this.qtdProduto = qtdProduto;
+		this.totalItem();
 	}
 
 	public double getTotal() {
@@ -41,11 +49,10 @@ public class ItemCarrinho {
 	}
 
 
-	public double totalItem() {
+	public void totalItem() {
 		double aux = this.produto.getValorProduto();
 		this.totalItem = aux * this.qtdProduto;
 		
-		return this.totalItem;
 	}
 	
 	public String toString(){

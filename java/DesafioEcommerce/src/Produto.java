@@ -51,13 +51,12 @@ public class Produto {
 	}
 	
 	 public String toString(){
-		 return "Código: "+
-				 this.codProduto +
-				 ", Descrição: "+
+		 return  this.codProduto +
+				 "\t "+
 				 this.descricaoProduto +
-				 ", Quantidade: "+
+				 "\t"+
 				 this.qtdProduto+
-				 ", Preço unitário: R$"+
+				 "\t\t R$ "+
 				 String.format("%.2f", this.valorProduto);
 	    }
 		
@@ -66,6 +65,7 @@ public class Produto {
 	}
 	
 	public void atualizarEstoque() {
+		
 		
 	}
 	
