@@ -75,6 +75,9 @@ public class Carrinho {
 	
 	// --------------------------------------------------------------------------------
 	public void mostraCarrinho() {
+		System.out.println("\n------------------------------------------------------------------------");
+		System.out.println("\t\t VISUALIZAR CARRINHO");
+		System.out.println("------------------------------------------------------------------------");
 		this.calculaSubtotal();
 		for(ItemCarrinho mostrar : this.mapItemCarrinho.values()) {
 			System.out.println(mostrar.toString());

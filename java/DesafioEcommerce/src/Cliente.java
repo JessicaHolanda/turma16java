@@ -5,11 +5,12 @@ public class Cliente {
 	private char generoCliente;
 	private String apelido;
 	
-	public Cliente(String nomeCliente, char generoCliente, String apelido) {
-
+	public Cliente(String nomeCliente, char generoCliente) {
 		this.nomeCliente = nomeCliente;
 		this.generoCliente = generoCliente;
-		this.apelido = apelido;
+	}
+
+	public Cliente() {
 	}
 
 	public String getNomeCliente() {
@@ -36,8 +37,23 @@ public class Cliente {
 		this.apelido = apelido;
 	}
 	
-	public void tratamentoGenero() {
-		
+	public void tratamentoGenero(char genero) {
+		if (genero == 'M')
+        {
+            this.apelido = "Sr. ";
+        }
+        else if (genero == 'F')
+        {
+            this.apelido = "Sra. ";
+        }
+        else  
+        {
+            this.apelido = "Sre. ";
+        }
+	}
+	
+	public String clienteComGenero() {
+		return "Bem vinde! " + this.apelido + " " + this.nomeCliente;
 	}
 	
 	
