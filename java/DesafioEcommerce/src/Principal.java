@@ -104,17 +104,15 @@ public class Principal {
 		System.out.println("\n------------------------------------------------------------------------");
 		System.out.println("\t\tREMOVER PRODUTO DO CARRINHO");
 		System.out.println("------------------------------------------------------------------------");
-		String exclui;
+		String cod;
 		System.out.println("\n\nDigite o código do produto que deseja excluir: ");
-		exclui = scan.next();
-		if (productMap.containsKey(exclui)) {
-			ItemCarrinho itemCarrinho = new ItemCarrinho(productMap.get(exclui));
-				carrinho.removerItemCarrinho(itemCarrinho);
+		cod = scan.next();
+		if (productMap.containsKey(cod)) {
+				carrinho.removerItemCarrinho(cod);
 		} 
 		else {
 			System.out.println("Código inválido!");
 		}
-
 		main(null);
 	}
 
@@ -143,7 +141,6 @@ public class Principal {
 		} else System.out.println("Código inválido!");
 
 		main(null);	
-
 	}
 
 	// --------------------------------------------------------------------------------

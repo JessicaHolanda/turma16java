@@ -67,9 +67,9 @@ public class Carrinho {
 	
 	// --------------------------------------------------------------------------------
 	
-	public void removerItemCarrinho(ItemCarrinho itemCarrinho) {
-		if(mapItemCarrinho.containsKey(itemCarrinho.getProduto().getCodProduto())) {	
-			mapItemCarrinho.remove(itemCarrinho.getProduto().getCodProduto());
+	public void removerItemCarrinho(String cod) {
+		if(mapItemCarrinho.containsKey(cod)) {	
+			mapItemCarrinho.remove(cod);
 		}
 	}
 	
