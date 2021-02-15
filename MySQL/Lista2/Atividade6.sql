@@ -43,4 +43,9 @@ SELECT Nome, Preco FROM tb_curso where Preco > 50;
 
 SELECT Nome, Preco FROM tb_curso where Preco Between 3 AND 60;
 
+SELECT Nome from tb_curso Where Nome LIKE "%j%";
 
+SELECT tb_curso.Nome, tb_curso.Nivel, tb_categoria.Nome
+	FROM tb_curso INNER JOIN tb_categoria 	
+	on tb_curso.categoria_id = tb_categoria.id
+	where tb_Categoria.Nome = "Desenvolvimento";
